@@ -9,7 +9,7 @@
 
 This repository provides a comprehensive GUI framework for developing and integrating machine learning methods, created for the MKT3434 Course at Yildiz Technical University's Department of Mechatronics Engineering. The application leverages PyQt6 to deliver an intuitive interface that supports both classical machine learning techniques and advanced deep learning implementations.
 
-**Course Instructor:** [Dr. EB](https://github.com/bayraktare)  
+**Course Instructor:** [Asst. Prof. Dr. Ertuğrul Bayraktar](https://github.com/bayraktare)  
 **Developed by:** [Alphan Bartu ALTINTAŞ](https://github.com/altintasalphan) - Mechatronics Engineering Student (22067048)
 
 ## 🔍 Key Features
@@ -33,8 +33,11 @@ This project is a fork developed as part of the Yildiz Technical University MKT3
 - **macOS**: 12.0 Monterey or higher (64-bit) (Note: no GPU support)
 
 #### Hardware Requirements
-- **For GPU Setup**: NVIDIA® CUDA®-enabled GPU
+- **For GPU Setup**: NVIDIA® CUDA®-enabled GPU 
+  - See the [list of CUDA®-enabled GPU cards](https://developer.nvidia.com/cuda-gpus)
 - **For CPU Setup**: Intel (x64) or Arm64 CPU recommended (AMD CPU compatibility not guaranteed)
+  - **Note:** TensorFlow binaries use AVX instructions which may not run on older CPUs
+  - **Note:** Starting with TensorFlow 2.10, Windows CPU-builds for x86/x64 processors are built, maintained, tested, and released by Intel through the `tensorflow-intel` package
 
 #### Software Prerequisites
 - Python 3.9-3.12
@@ -46,30 +49,48 @@ This project is a fork developed as part of the Yildiz Technical University MKT3
 
 ### Installation Guide
 
-1. **Create a Virtual Environment (Recommended)**
-   ```bash
-   python -m venv /path/to/new/virtual/environment
-   source /path/to/new/virtual/environment/bin/activate  # Linux/macOS
-   # OR
-   \path\to\new\virtual\environment\Scripts\activate  # Windows
-   ```
+#### 1. Create a Virtual Environment (Recommended)
+```bash
+python -m venv /path/to/new/virtual/environment
+source /path/to/new/virtual/environment/bin/activate  # Linux/macOS
+# OR
+\path\to\new\virtual\environment\Scripts\activate  # Windows
+```
 
-2. **Install TensorFlow with GPU Support**
-   ```bash
-   python -m pip install --upgrade pip
-   python -m pip install tensorflow[and-cuda]
-   ```
+#### 2. Install TensorFlow
 
-3. **Verify GPU Configuration**
-   ```bash
-   python -c "import tensorflow as tf; print(tf.config.list_physical_devices('GPU'))"
-   ```
-   If GPUs are listed, your GPU setup is working correctly.
+**For GPU Support:**
+```bash
+python -m pip install --upgrade pip
+python -m pip install tensorflow[and-cuda]
+```
 
-4. **Install Additional Dependencies**
-   ```bash
-   python -m pip install numpy pandas matplotlib PyQt6 scikit-learn torch torchvision torchaudio opencv-python opencv-contrib-python scipy fastai kornia
-   ```
+**For CPU-only:**
+```bash
+python -m pip install --upgrade pip
+python -m pip install tensorflow  # or pip install tensorflow-cpu
+```
+
+**Note:** TensorFlow versions above 2.10 do not support GPU on Windows Native.
+
+#### 3. Verify Installation
+
+**For GPU Configuration:**
+```bash
+python -c "import tensorflow as tf; print(tf.config.list_physical_devices('GPU'))"
+```
+If GPUs are listed, your GPU setup is working correctly.
+
+**For CPU Configuration:**
+```bash
+python -c "import tensorflow as tf; print(tf.reduce_sum(tf.random.normal([1000, 1000])))"
+```
+If a tensor is returned, you've installed TensorFlow successfully.
+
+#### 4. Install Additional Dependencies
+```bash
+python -m pip install numpy pandas matplotlib PyQt6 scikit-learn torch torchvision torchaudio opencv-python opencv-contrib-python scipy fastai kornia
+```
 
 ## 🖥️ Development Environment
 
@@ -119,6 +140,18 @@ python base_gui_for_MKT3434_by_eb.py
        unset QT_QPA_PLATFORM
    fi
    ```
+
+## 📚 Additional Resources
+
+For further assistance with installation issues or for more detailed information about the dependencies, please refer to these official resources:
+
+- **TensorFlow Installation**: [TensorFlow Installation Guide](https://www.tensorflow.org/install/pip)
+- **CUDA Installation**: [CUDA Toolkit Release Notes](https://docs.nvidia.com/cuda/cuda-toolkit-release-notes/index.html)
+- **cuDNN Installation**: [cuDNN Documentation](https://docs.nvidia.com/deeplearning/cudnn/latest/)
+- **TensorRT Installation** (optional): [TensorRT Documentation](https://docs.nvidia.com/deeplearning/tensorrt/latest/index.html)
+- **CUDA-Enabled GPUs**: [List of CUDA-Enabled NVIDIA GPUs](https://developer.nvidia.com/cuda-gpus)
+
+If you encounter any problems with running the program or installing prerequisites, the resources above should be your first reference point for troubleshooting.
 
 ## 📞 Support
 
